@@ -1,0 +1,11 @@
+.import/
+.mono/
+.vscode/
+.vs/
+
+Example/
+
+default_env.tres
+icon.png
+icon.png.import
+project.godot
