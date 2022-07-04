@@ -66,14 +66,11 @@ namespace Picalines.Godot.GridNode
         public Vector2 TargetPosition { get; private set; }
 
         /// <summary>
-        /// Duration of the movement in seconds.
-        /// <list type="bullet">
-        ///     <item>Cannot be set to negative number</item>
-        ///     <item>
-        ///         Even with a value of 0, the movement will end only in
-        ///         <see cref="_Process(float)"/>. You may need <see cref="MoveInstantly(GridDirection2D)"/>
-        ///     </item>
-        /// </list>
+        /// Duration of the movement in seconds. Cannot be set to negative number.
+        /// <para>
+        ///     Even with a value of 0, the movement will end only in <see cref="_Process(float)"/>.
+        ///     See <see cref="MoveInstantly(GridDirection2D)"/>.
+        /// </para>
         /// </summary>
         public float MovementDuration
         {
@@ -94,19 +91,14 @@ namespace Picalines.Godot.GridNode
         }
 
         /// <summary>
-        /// Starts the movement in given <paramref name="direction"/>.
-        /// <list type="bullet">
-        ///     <item>Calls the <see cref="StopMoving"/> method if <see cref="IsMoving"/></item>
-        ///     <item>Emits the <see cref="movement_started"/> signal</item>
-        ///     <item>Actual offset depends on <see cref="GridSize"/></item>
-        /// </list>
+        /// Starts the movement in given <paramref name="direction"/>. Ignored when <see cref="IsMoving"/> is true.
+        /// Emits the <see cref="movement_started"/> signal.
         /// </summary>
-        /// <param name="direction"></param>
         public void StartMoving(GridDirection2D direction)
         {
             if (IsMoving)
             {
-                StopMoving();
+                return;
             }
 
             MovementDirection = direction;
@@ -120,11 +112,8 @@ namespace Picalines.Godot.GridNode
         }
 
         /// <summary>
-        /// Stops the current movement if present.
-        /// <list type="bullet">
-        ///     <item>Keeps the current <see cref="Node2D.Position"/></item>
-        ///     <item>Emits the <see cref="movement_finished"/> signal</item>
-        /// </list>
+        /// Stops the current movement if present. Keeps the current <see cref="Node2D.Position"/>.
+        /// Emits the <see cref="movement_finished"/> signal.
         /// </summary>
         public void StopMoving()
         {
@@ -155,7 +144,6 @@ namespace Picalines.Godot.GridNode
         /// <summary>
         /// Performs the movement inside one method call.
         /// </summary>
-        /// <param name="direction"></param>
         public void MoveInstantly(GridDirection2D direction)
         {
             StartMoving(direction);
