@@ -91,6 +91,14 @@ namespace Picalines.Godot.GridNode
         }
 
         /// <summary>
+        /// Returns the offset vector along which the node would move in given <paramref name="direction"/>.
+        /// </summary>
+        public Vector2 GetMovementOffset(GridDirection2D direction)
+        {
+            return direction.ToVector() * GridSize;
+        }
+
+        /// <summary>
         /// Starts the movement in given <paramref name="direction"/>. Ignored when <see cref="IsMoving"/> is true.
         /// Emits the <see cref="movement_started"/> signal.
         /// </summary>
@@ -103,7 +111,7 @@ namespace Picalines.Godot.GridNode
 
             MovementDirection = direction;
             StartPosition = Position;
-            TargetPosition = Position + direction.ToVector() * GridSize;
+            TargetPosition = Position + GetMovementOffset(direction);
 
             _TimeFromStart = 0;
 
